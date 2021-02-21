@@ -47,7 +47,7 @@ async def on_message(message):
             await message.channel.send(quote)
             return
         elif message.content.startswith('$greet'):
-            await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ :'+'LINK')
+            await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ '+'https://github.com/Kabiirk/discord_bots')
             return
         # END
 
@@ -56,4 +56,4 @@ async def on_message(message):
         await message.channel.send("This is a Links-only Channel ! Kindly post valid Links only.")
 
 
-client.run('Paste your token Here')
+client.run('Paste your token here')
