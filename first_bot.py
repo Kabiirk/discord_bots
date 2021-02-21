@@ -1,9 +1,7 @@
 import discord
-import os
 import requests
 import json
 from urllib import parse as urlparse
-# Functions that the bot performs on the server go here
 
 client = discord.Client()
 
@@ -38,6 +36,10 @@ async def on_message(message):
         pass
     
     else:
+        # Functions that the bot performs on the server go here
+
+        # ignore if the message is from the bot itserl client.user reffers to the bot
+        # (which is the user in this case)
         if message.author==client.user:
             return
         elif message.content.startswith('$inspire'):
@@ -47,7 +49,9 @@ async def on_message(message):
         elif message.content.startswith('$greet'):
             await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ :'+'LINK')
             return
-        
+        # END
+
+        # Deletes messages if they don't begin with $inspire or $greet or don't contain links
         await message.delete()
         await message.channel.send("This is a Links-only Channel ! Kindly post valid Links only.")
 
