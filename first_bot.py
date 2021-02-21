@@ -47,7 +47,7 @@ async def on_message(message):
             await message.channel.send(quote)
             return
         elif message.content.startswith('$greet'):
-            await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ '+'https://github.com/Kabiirk/discord_bots')
+            await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ :'+'https://github.com/Kabiirk/discord_bots')
             return
         # END
 
