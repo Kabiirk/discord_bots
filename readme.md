@@ -2,7 +2,7 @@
 
 A bot that allows only links to be posted in channels.
 <br>
-Has additional features which utilizes some of the free Public APIs listed @ https://github.com/public-apis/public-apis
+Has additional features which utilize some of the free Public APIs listed @ https://github.com/public-apis/public-apis
 
 ### List of available commands
 * ```$greet``` - Greets the user and redirects to this repo.
