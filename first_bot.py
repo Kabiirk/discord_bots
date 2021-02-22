@@ -19,6 +19,22 @@ def get_quote():
     
     return(quote)
 
+def get_xkcd(comic_id):
+    url = "https://xkcd.com/"+str(comic_id)+"/info.0.json"
+    response = requests.request("GET", url)
+    json_data = json.loads(response.text)
+    img_link = json_data['img']
+    
+    return img_link
+
+def get_joke():
+    url = "https://official-joke-api.appspot.com/jokes/random"
+    response = requests.request("GET", url)
+    json_data = json.loads(response.text)
+    joke = json_data['setup'] + '\n\n' + json_data['punchline']
+    
+    return joke
+
 
 # Main Implementation
 @client.event
@@ -42,12 +58,26 @@ async def on_message(message):
         # (which is the user in this case)
         if message.author==client.user:
             return
+
         elif message.content.startswith('$inspire'):
             quote = get_quote()
             await message.channel.send(quote)
             return
+            
         elif message.content.startswith('$greet'):
-            await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ :'+'https://github.com/Kabiirk/discord_bots')
+            await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ : '+'https://github.com/Kabiirk/discord_bots')
+            return
+        elif message.content.startswith('$xkcd'):
+            comic_id = message.content.split(" ",1)[1]
+            if(comic_id == '0'):
+                await message.channel.send("Comic stip not indexable, try another number")
+            else:
+                comic_img_link = get_xkcd(comic_id)
+                await message.channel.send(comic_img_link)
+            return
+        elif message.content.startswith('$joke'):
+            joke = get_joke()
+            await message.channel.send(joke)
             return
         # END
 
@@ -56,4 +86,4 @@ async def on_message(message):
         await message.channel.send("This is a Links-only Channel ! Kindly post valid Links only.")
 
 
-client.run('Paste your token here')
+client.run('ODEzMDU0NzgwNDQ3OTE2MDYz.YDJuRQ.p6OOEHHHbGvMzuHBzJXExu9fTKc')
