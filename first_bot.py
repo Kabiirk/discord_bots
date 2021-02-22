@@ -86,4 +86,4 @@ async def on_message(message):
         await message.channel.send("This is a Links-only Channel ! Kindly post valid Links only.")
 
 
-client.run('ODEzMDU0NzgwNDQ3OTE2MDYz.YDJuRQ.p6OOEHHHbGvMzuHBzJXExu9fTKc')
+client.run('Paste Your Token Here')
