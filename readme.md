@@ -7,7 +7,11 @@ Has additional features which utilize some of the free Public APIs listed @ http
 ### List of available commands
 I added some additional features to this bot as well ! Type the following commands in the chat to get a response from the bot !
 * ```$greet``` - Greets the user and redirects to this repo.
+![greet response](https://github.com/Kabiirk/discord_bots/blob/main/src/greet.png)
 * ```$inspire``` - The bot sends randomly retreived Inspirational quotes fetched from [here](https://zenquotes.io/).
+![inspire response](https://github.com/Kabiirk/discord_bots/blob/main/src/Inspire.png)
 * ```$xkcd <comic ID>``` - The bot sends randomly retreived Inspirational quotes fetched from [here](https://xkcd.com/).
 (comic id is a number)
+![xkcd response](https://github.com/Kabiirk/discord_bots/blob/main/src/xkcd.png)
 * ```$joke``` - The bot sends randomly retreived Inspirational quotes fetched from [here](https://official-joke-api.appspot.com/jokes/random).
+![joke response](https://github.com/Kabiirk/discord_bots/blob/main/src/joke.png)
