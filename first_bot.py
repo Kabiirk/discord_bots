@@ -31,7 +31,7 @@ def url_check(url):
 
     else:
         try:
-            # check wether it's a legit URL with proper response (200 etc.)
+            # check wether it's a legit https URL with proper response (200 etc.)
             # would filter out stuff like https://www.not_a_url.com
             #
             # RESPONSE CODE RANGES:
