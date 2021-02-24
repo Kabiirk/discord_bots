@@ -7,10 +7,33 @@ client = discord.Client()
 
 # Functions executed in the program go here
 def url_check(url):
-    if urlparse.urlparse(url).scheme:
-        return True
+    # check wether URL format if correct or not
+    url_scheme = urlparse.urlparse(url).scheme
+    # e.g. of result
+    # urlparse.urlparse('https://www.youtube.com/')
+    # ParseResult(scheme='https', netloc='www.youtube.com', path='/', params='', query='', fragment='')
+
+    # Only allows https URLs with a valid response
+    if(url_scheme != 'https'):
+        return False, "This bot only allows links following https scheme."
+
     else:
-        return False
+        try:
+            # check wether it's a legit URL with proper response (200 etc.)
+            # would filter out stuff like https://www.not_a_url.com
+            #
+            # RESPONSE CODE RANGES:
+            # Informational responses (100–199)
+            # Successful responses (200–299)
+            # Redirects (300–399)
+            # Server & Client Errors => (400-599)
+            response = requests.get(url)
+
+            # Put code to handle multiple response codes
+            return True, None
+        
+        except requests.ConnectionError as exception:
+            return False, "Seems like the website doesn't exist, try sending another link :)."
 
 def get_quote():
     response = requests.get('https://zenquotes.io/api/random')
@@ -47,8 +70,11 @@ async def on_ready():
 async def on_message(message):
     if message.author==client.user:
         return
+
+    valid_url, error_text = url_check(message.content)
+    # boolean, string
         
-    if url_check(message.content):
+    if valid_url:
         pass
     
     else:
@@ -83,7 +109,7 @@ async def on_message(message):
 
         # Deletes messages if they don't begin with $inspire or $greet or don't contain links
         await message.delete()
-        await message.channel.send("This is a Links-only Channel ! Kindly post valid Links only.")
+        await message.channel.send(error_text)
 
 
-client.run('Paste Your Token Here')
+client.run('Paste your Token Here')
