@@ -6,7 +6,6 @@ from urllib import parse as urlparse
 client = discord.Client()
 
 # Functions executed in the program go here
-# ======================================================================================================================
 def url_check(url):
     # check wether URL format if correct or not
     url_scheme = urlparse.urlparse(url).scheme
@@ -16,7 +15,7 @@ def url_check(url):
 
     
     if(len(url_scheme)<=0):
-        return False, "This is a links-only channel, Kindly only post valid https links only."
+        return False, "Only https links allowed in this channel, any other message(s) will be deleted."
         # url_scheme empty for normal text
         # e.g. 
         # urlparse.urlparse('$jokeasgf')
@@ -70,7 +69,7 @@ def get_joke():
     joke = json_data['setup'] + '\n\n' + json_data['punchline']
     
     return joke
-# ======================================================================================================================
+
 
 # Main Implementation
 @client.event
@@ -123,5 +122,4 @@ async def on_message(message):
         if(error_text != None):
             await message.channel.send(error_text)
 
-
-client.run('ODEzMDU0NzgwNDQ3OTE2MDYz.YDJuRQ.TFcpadpzKncYsmbs10KNzsGieHo')
+client.run('Paste Token here')
