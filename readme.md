@@ -41,7 +41,7 @@ I added some additional features to this bot as well ! Type the following comman
  
 * **Run the project**
     * In the **first_bot.py** file, put your copied token in the ```client.run()``` function at the end as a string.
-    * All that's left to do now is run the Project ! you can do so by :
+    * All that's left to do now is run the Project ! You can do so by :
 ```
 python first_bot.py
 ``` 
@@ -49,7 +49,7 @@ or
 ```
 python3 first_bot.py
 ```
-The script has run successfully and your bot is functional if you see the following in the terminal :
+The script is running successfully and your bot is functional if you see the following in the terminal :
 ```
 The bot has started.
 <BOT username>#number
