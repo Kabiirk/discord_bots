@@ -90,21 +90,29 @@ async def on_message(message):
 
     # boolean, string
     valid_url, error_text = url_check(message.content)
-        
+
+    # Channel name in which message was sent to
+    # Done since this bot maybe on multiple channels
+    # but desired response is channel based i.e.
+    # if this is channe A then do this, else do this(nothing in this case).
+    message_channel = str(message.channel)
+    # message.channel is of type <class 'discord.channel.TextChannel'>
+    # therefore converted to string
+
     # Don't do anything to the message if it a valid url
     if valid_url:
         pass
     
     else:
         # Functions that the bot performs on the server go here
-        if(first_word=='$inspire'):
+        if(first_word=='$inspire' and message_channel!='bot-test'):
             quote = get_quote()
             await message.channel.send(quote)
             return
-        elif first_word=='$greet':
+        elif(first_word=='$greet' and message_channel!='bot-test'):
             await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ : '+'https://github.com/Kabiirk/discord_bots')
             return
-        elif first_word=='$xkcd':
+        elif(first_word=='$xkcd' and message_channel!='bot-test'):
             comic_id = message.content.split(" ",1)[1]
             if(comic_id == '0'):
                 await message.channel.send("Comic stip not indexable, try another number")
@@ -112,7 +120,7 @@ async def on_message(message):
                 comic_img_link = get_xkcd(comic_id)
                 await message.channel.send(comic_img_link)
             return
-        elif first_word=='$joke':
+        elif(first_word=='$joke'and message_channel!='bot-test'):
             joke = get_joke()
             await message.channel.send(joke)
             return
@@ -122,4 +130,4 @@ async def on_message(message):
         if(error_text != None):
             await message.channel.send(error_text)
 
-client.run('Paste Token here')
+client.run('Paste Token Here')
