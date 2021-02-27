@@ -18,11 +18,11 @@ I added some additional features to this bot as well ! Type the following comman
 ![inspire response](https://github.com/Kabiirk/discord_bots/blob/main/src/Inspire.png)
 <br>
 
-* ```$xkcd number``` - The bot sends randomly retreived Inspirational quotes fetched from [here](https://xkcd.com/).
+* ```$xkcd number``` - The bot sends randomly retreived XKCD Comic strips fetched from [here](https://xkcd.com/).
 ![xkcd response](https://github.com/Kabiirk/discord_bots/blob/main/src/xkcd.png)
 <br>
 
-* ```$joke``` - The bot sends randomly retreived Inspirational quotes fetched from [here](https://official-joke-api.appspot.com/jokes/random).
+* ```$joke``` - The bot sends randomly retreived jokes fetched from [here](https://official-joke-api.appspot.com/jokes/random).
 ![joke response](https://github.com/Kabiirk/discord_bots/blob/main/src/joke.png)
 
 ---
