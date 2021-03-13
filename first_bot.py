@@ -79,7 +79,8 @@ def get_shakespearean_text(input_text):
     params = {'text': input_text}
 
     r = requests.post(url, params)
-    return r
+    json_data = json.loads(response.text)
+    return json_data["error"]["message"]
 
 
 # Main Implementation
