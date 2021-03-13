@@ -79,8 +79,13 @@ def get_shakespearean_text(input_text):
     params = {'text': input_text}
 
     r = requests.post(url, params)
-    json_data = json.loads(response.text)
-    return json_data["error"]["message"]
+    json_data = json.loads(r.text)
+
+    if(r.status_code == 429):
+        return json_data["error"]["message"] # Error text for exceeding rate limit
+    else:
+        return json_data["contents"]["translated"]
+    
 
 
 # Main Implementation
