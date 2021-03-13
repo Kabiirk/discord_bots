@@ -25,6 +25,9 @@ I added some additional features to this bot as well ! Type the following comman
 * ```$joke``` - The bot sends randomly retreived jokes fetched from [here](https://official-joke-api.appspot.com/jokes/random).
 ![joke response](https://github.com/Kabiirk/discord_bots/blob/main/src/joke.png)
 
+* ```$BardofAvon <some text>``` - The bot responds with Shakespearean translator of ```<sometext>``` from [here](https://funtranslations.com/shakespeare).
+![Bard's response]
+
 ---
 
 ### Try Running it yourself
