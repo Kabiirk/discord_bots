@@ -70,6 +70,17 @@ def get_joke():
     
     return joke
 
+def get_shakespearean_text(input_text):
+    # Ref for Public API : https://funtranslations.com/api/shakespeare
+    # DISCLAMER : The public version of this API is Rate limited, i.e.
+    # only a finite number of requests allowed per user per hour
+
+    url = "https://api.funtranslations.com/translate/shakespeare.json"
+    params = {'text': input_text}
+
+    r = requests.post(url, params)
+    return r
+
 
 # Main Implementation
 @client.event
@@ -86,8 +97,8 @@ async def on_message(message):
         return
     
     # Take only the first word
-    first_word = message.content.split(" ", 1)[0] 
-
+    first_word = message.content.split(" ", 1)[0]
+    
     # boolean, string
     valid_url, error_text = url_check(message.content)
 
@@ -105,14 +116,14 @@ async def on_message(message):
     
     else:
         # Functions that the bot performs on the server go here
-        if(first_word=='$inspire' and message_channel!='bot-test'):
+        if(first_word=='$inspire' and message_channel=='bot-test'):
             quote = get_quote()
             await message.channel.send(quote)
             return
-        elif(first_word=='$greet' and message_channel!='bot-test'):
+        elif(first_word=='$greet' and message_channel=='bot-test'):
             await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ : '+'https://github.com/Kabiirk/discord_bots')
             return
-        elif(first_word=='$xkcd' and message_channel!='bot-test'):
+        elif(first_word=='$xkcd' and message_channel=='bot-test'):
             comic_id = message.content.split(" ",1)[1]
             if(comic_id == '0'):
                 await message.channel.send("Comic stip not indexable, try another number")
@@ -120,9 +131,15 @@ async def on_message(message):
                 comic_img_link = get_xkcd(comic_id)
                 await message.channel.send(comic_img_link)
             return
-        elif(first_word=='$joke'and message_channel!='bot-test'):
+        elif(first_word=='$joke'and message_channel=='bot-test'):
             joke = get_joke()
             await message.channel.send(joke)
+            return
+        elif(first_word=='$BardofAvon'and message_channel=='bot-test'):
+            sentence = message.content.split(" ", 1)[1] # Takes the sentence after the command
+
+            shakespearean_text = get_shakespearean_text(sentence)
+            await message.channel.send(shakespearean_text)
             return
 
         # Deletes messages whose first word isn't $inspire, $greet etc. or aren't links
