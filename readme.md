@@ -26,7 +26,7 @@ I added some additional features to this bot as well ! Type the following comman
 ![joke response](https://github.com/Kabiirk/discord_bots/blob/main/src/joke.png)
 
 * ```$BardofAvon <some text>``` - The bot responds with Shakespearean translation of ```<sometext>``` from [here](https://funtranslations.com/shakespeare).
-![Bard's response]
+![Bard's response](https://github.com/Kabiirk/discord_bots/blob/main/src/BardofAvon.png)
 
 ---
 

@@ -6,13 +6,13 @@ from urllib import parse as urlparse
 client = discord.Client()
 
 # Functions executed in the program go here
+# ===================================================================================================================================
 def url_check(url):
     # check wether URL format if correct or not
     url_scheme = urlparse.urlparse(url).scheme
-    # e.g. of result
-    # urlparse.urlparse('https://www.youtube.com/')
-    # ParseResult(scheme='https', netloc='www.youtube.com', path='/', params='', query='', fragment='')
-
+    # e.g.
+    # >> urlparse.urlparse('https://www.youtube.com/')
+    # >> ParseResult(scheme='https', netloc='www.youtube.com', path='/', params='', query='', fragment='')
     
     if(len(url_scheme)<=0):
         return False, "Only https links allowed in this channel, any other message(s) will be deleted."
@@ -27,8 +27,7 @@ def url_check(url):
 
     # Only allows https URLs with a valid response
     if(url_scheme != 'https'):
-        return False, "This bot only allows links following https scheme."
-
+        return False, "This bot only allows links following HTTPS scheme."
     else:
         try:
             # check wether it's a legit https URL with proper response (200 etc.)
@@ -43,10 +42,11 @@ def url_check(url):
 
             # Put code to handle multiple response codes
             return True, None
-        
+
         except requests.ConnectionError as exception:
             return False, "Seems like the website doesn't exist, try sending another link :)."
 
+# $inspire
 def get_quote():
     response = requests.get('https://zenquotes.io/api/random')
     json_data = json.loads(response.text)
@@ -54,6 +54,7 @@ def get_quote():
     
     return(quote)
 
+# $xkcd
 def get_xkcd(comic_id):
     url = "https://xkcd.com/"+str(comic_id)+"/info.0.json"
     response = requests.request("GET", url)
@@ -62,6 +63,7 @@ def get_xkcd(comic_id):
     
     return img_link
 
+# $joke
 def get_joke():
     url = "https://official-joke-api.appspot.com/jokes/random"
     response = requests.request("GET", url)
@@ -70,6 +72,7 @@ def get_joke():
     
     return joke
 
+# $BardofAvon
 def get_shakespearean_text(input_text):
     # Ref for Public API : https://funtranslations.com/api/shakespeare
     # DISCLAMER : The public version of this API is Rate limited, i.e.
@@ -78,7 +81,9 @@ def get_shakespearean_text(input_text):
     url = "https://api.funtranslations.com/translate/shakespeare.json"
     params = {'text': input_text}
 
+    # Make request
     r = requests.post(url, params)
+    #Parsing request
     json_data = json.loads(r.text)
 
     if(r.status_code == 429):
@@ -89,6 +94,7 @@ def get_shakespearean_text(input_text):
 
 
 # Main Implementation
+# ===================================================================================================================================
 @client.event
 async def on_ready():
     print("The bot has started.")
@@ -119,16 +125,17 @@ async def on_message(message):
     # Don't do anything to the message if it a valid url
     if valid_url:
         pass
-    
     else:
         # Functions that the bot performs on the server go here
-        if(first_word=='$inspire' and message_channel=='bot-test'):
+        if(first_word=='$greet' and message_channel=='bot-test'):
+            await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ : '+'https://github.com/Kabiirk/discord_bots')
+            return
+        
+        elif(first_word=='$inspire' and message_channel=='bot-test'):
             quote = get_quote()
             await message.channel.send(quote)
             return
-        elif(first_word=='$greet' and message_channel=='bot-test'):
-            await message.channel.send('Hello '+str(message.author)+' !'+'\n'+'You can look up my documentation @ : '+'https://github.com/Kabiirk/discord_bots')
-            return
+        
         elif(first_word=='$xkcd' and message_channel=='bot-test'):
             comic_id = message.content.split(" ",1)[1]
             if(comic_id == '0'):
@@ -137,13 +144,14 @@ async def on_message(message):
                 comic_img_link = get_xkcd(comic_id)
                 await message.channel.send(comic_img_link)
             return
+        
         elif(first_word=='$joke'and message_channel=='bot-test'):
             joke = get_joke()
             await message.channel.send(joke)
             return
+        
         elif(first_word=='$BardofAvon'and message_channel=='bot-test'):
             sentence = message.content.split(" ", 1)[1] # Takes the sentence after the command
-
             shakespearean_text = get_shakespearean_text(sentence)
             await message.channel.send(shakespearean_text)
             return
